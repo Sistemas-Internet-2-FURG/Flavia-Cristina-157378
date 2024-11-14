@@ -1,0 +1,58 @@
+<!-- aluno.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Aluno</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('routes.index') }}">Página Inicial</a></li>
+                <li><a href="{{ url_for('routes.logout') }}">Sair</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="perfil-aluno">
+            <h1>Bem-vindo, {{ username }}!</h1>
+
+            <!-- Informações do aluno -->
+            <div class="informacoes">
+                <h2>Dados do Aluno</h2>
+                <p><strong>Nome completo:</strong> {{ aluno.fullname }}</p>
+                <p><strong>Usuário:</strong> {{ aluno.username }}</p>
+                <p><strong>Email:</strong> {{ aluno.email }}</p>
+                <p><strong>Contato:</strong> {{ aluno.contato }}</p>
+                <p><strong>CPF:</strong> {{ aluno.cpf }}</p>
+            </div>
+
+            <!-- Mostrar treinos do aluno -->
+            <div class="treinos">
+                <h2>Meus Treinos</h2>
+                <ul>
+                    {% for treino in aluno.treinos %}
+                        <li>
+                            <strong>{{ treino.nome_treino }}</strong> - {{ treino.intensidade }} - {{ treino.objetivo }}
+                            <ul>
+                                {% for exercicio in treino.exercicios %}
+                                    <li>{{ exercicio.name }} - {{ exercicio.descricao }}</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Seu Sistema de Treinamento</p>
+    </footer>
+</body>
+</html>

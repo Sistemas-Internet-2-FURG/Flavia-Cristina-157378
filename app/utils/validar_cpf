@@ -1,0 +1,12 @@
+# Só vai checar o formato, não valida se o cpf realmente existe
+import re
+def validar_cpf(cpf):
+    if not re.match(r"\d{3}\.\d{3}\.\d{3}-\d{2}", cpf):
+        return False
+    return True
+
+def formatar_cpf(cpf):
+    cpf = re.sub(r'\D', '', cpf)
+    if len(cpf) == 11:
+        return cpf
+    return f'{cpf[:3]}.{cpf[3:6]}.{cpf[6:9]}-{cpf[9:11]}'
